@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+	  <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NuGet.CommandLine" Version="6.6.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="squirrel.windows" Version="1.9.0" />
+  </ItemGroup>
+	<ItemGroup>
+		<Content Include="PythonScripts\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="LocalMove\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BatchExportShell.Core\BatchExportShell.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PythonScripts\tmp\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\lcmoore\.nuget\packages\accord\3.8.0\build\Accord.dll.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\lcmoore\.nuget\packages\accord\3.8.0\build\Accord.dll.config" />
+  </ItemGroup>
+
+</Project>

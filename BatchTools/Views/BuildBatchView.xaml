@@ -1,0 +1,228 @@
+﻿<UserControl x:Class="BatchTools.Views.BuildBatchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
+             xmlns:VM="clr-namespace:BatchTools.Models"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Background="#2F3136"
+                   Margin="5">
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <prism:InvokeCommandAction Command="{Binding StackPanelClickCommand}" CommandParameter="{Binding  Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}">
+                    </prism:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+
+            <TreeView x:Name="treeView"  ItemsSource="{Binding CurrentResults}" Background="Transparent" BorderThickness="0"
+                      >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <prism:InvokeCommandAction Command="{Binding TreeViewSelectionChangedCommand}" CommandParameter="{Binding  Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}">
+                        </prism:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+
+
+                <TreeView.Resources>
+
+
+                    <HierarchicalDataTemplate DataType="{x:Type VM:Patient}" ItemsSource="{Binding Courses}">
+
+
+
+                        <Border CornerRadius="6" BorderBrush="Transparent" Background="LightGray" BorderThickness="1">
+                            <StackPanel Background="#182B49" Orientation="Horizontal" ToolTip="Patient" Width="500" >
+
+                                <Border Width="30" Height="30" CornerRadius="25">
+                                    <Border.Background>
+                                        <ImageBrush Stretch="Fill" ImageSource="/Resources/portrait2.jpg"/>
+                                    </Border.Background>
+                                </Border>
+                                <TextBlock Text="{Binding Display}" Foreground="white" FontSize="12" FontWeight="Medium" VerticalAlignment="Center"
+                                       Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type VM:Course}" ItemsSource="{Binding Plans}" >
+                        <Border CornerRadius="6" BorderBrush="Transparent" Background="LightGray" BorderThickness="1">
+                            <StackPanel Background="#182B49" Orientation="Horizontal" ToolTip="Patient" Width="400" >
+                                <Border Width="30" Height="30" CornerRadius="25">
+                                    <Border.Background>
+                                        <ImageBrush Stretch="Fill" ImageSource="/Resources/course.jpg"/>
+                                    </Border.Background>
+                                </Border>
+                                <TextBlock Text="{Binding Id}" Foreground="white" FontSize="12" FontWeight="Medium" VerticalAlignment="Center"
+                                       Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                    </HierarchicalDataTemplate>
+                    <DataTemplate DataType="{x:Type VM:Plan}">
+                        <Border CornerRadius="6" BorderBrush="Transparent" Background="LightGray" BorderThickness="1">
+                            <StackPanel Background="#182B49" Orientation="Horizontal" ToolTip="Patient" Width="300">
+                                <Border Width="30" Height="30" CornerRadius="25">
+                                    <Border.Background>
+                                        <ImageBrush Stretch="Fill" ImageSource="/Resources/plan.jpg"/>
+                                    </Border.Background>
+                                </Border>
+                                <TextBlock Text="{Binding Name}" Foreground="white" FontSize="12" FontWeight="Medium" VerticalAlignment="Center"
+                                       Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+
+                </TreeView.Resources>
+
+
+
+            </TreeView>
+
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+       
+
+                <Button Grid.Row="0" Content="{Binding ImportButtonText}" Background="#FFCD00" Margin="5" 
+                        Foreground="Black" FontWeight="Medium" 
+                        Command="{Binding ImportQueryCommand}"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowDuration="10000"
+                        ToolTip="Load a CSV of patient data.&#x0a;
+                        Data format:&#x0a;
+                        MRN,Course(optional),Plan(optional)&#x0a;
+                   
+                       
+                        "
+                        BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Background" CornerRadius="20" Background="#FFCD00">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" TargetName="Background" Value="Gray"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" TargetName="Background" Value="Gray"/>
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+
+                    </Button.Template>
+                </Button>
+
+          
+
+  
+                <Button Grid.Row="2" Content="Reset" Background="#FFCD00" 
+                        Margin="5" Foreground="black" 
+                        FontWeight="Medium" Command="{Binding ResetCurrentResultsCommand}"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowDuration="10000"
+                        ToolTip="Clears all loaded patients."
+                        BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Background" CornerRadius="20" Background="#FFCD00">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" TargetName="Background" Value="Gray"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" TargetName="Background" Value="Gray"/>
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+
+                    </Button.Template>
+                </Button>
+
+  
+        
+                <Button Grid.Row="1" Content="Add to Batch" 
+                        Background="#FFCD00" Margin="5" 
+                        Foreground="black" FontWeight="Medium" 
+                        Command="{Binding AddSelectionToBatchCommand}"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowDuration="10000"
+                        ToolTip="Add the currently selected item to the batch."
+                        BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Background" CornerRadius="20" Background="#FFCD00" >
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" TargetName="Background" Value="Gray"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" TargetName="Background" Value="Gray"/>
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+
+                    </Button.Template>
+                </Button>
+
+
+
+        </Grid>
+
+
+        <ListBox Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Background="#2F3136" Margin="5,5,5,10"
+                 ItemsSource="{Binding SelectedItem}" DisplayMemberPath="ExpandedDisplay" Foreground="white" FontWeight="Medium" BorderThickness="0">
+
+
+        </ListBox>
+
+
+
+
+    </Grid>
+</UserControl>

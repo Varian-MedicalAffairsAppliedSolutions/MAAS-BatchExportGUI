@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="ListBoxItem" x:Key="BatchCard">
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background"  Value="#00629B"/>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Background" Value="#182B49"/>
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Background="{TemplateBinding Background}" Height="25" CornerRadius="15" Margin="3">
+                        <StackPanel Background="{TemplateBinding Background}" Orientation="Horizontal" ToolTip="Patient" HorizontalAlignment="Left">
+
+                            <Border Width="30" Height="30" CornerRadius="25">
+                                <Border.Background>
+                                    <ImageBrush Stretch="Fill" ImageSource="../Resources/plan.jpg"/>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Text="Patient:"  Foreground="LightGray" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" Margin="3,3,3,3"/>
+                            <TextBlock Text="{Binding PatientID}" Foreground="white" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" Margin="0,3,10,3"/>
+                            <TextBlock Text="Course:" Foreground="LightGray" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" Margin="0,3,3,3"/>
+                            <TextBlock Text="{Binding Course}" Foreground="white" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" Margin="0,3,10,3"/>
+                            <TextBlock Text="Plan:" Foreground="LightGray" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" Margin="0,3,3,3"/>
+                            <TextBlock Text="{Binding Name}" Foreground="white" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" Margin="0,3,10,3"/>
+                            <TextBlock Text="Plan Type:" Foreground="LightGray" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" Margin="0,3,3,3"/>
+                            <TextBlock Text="{Binding PlanType}" Foreground="white" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" Margin="0,3,10,3"/>
+                            <TextBlock Text="Approval Status:" Foreground="LightGray" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" Margin="0,3,3,3"/>
+                            <TextBlock Text="{Binding ApprovalStatus}" Foreground="white" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" Margin="0,3,10,3"/>
+
+
+
+
+
+
+                        </StackPanel>
+                    </Border>
+
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

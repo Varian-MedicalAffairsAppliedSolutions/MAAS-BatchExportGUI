@@ -1,0 +1,17 @@
+﻿<prism:PrismApplication x:Class="BatchExportShell.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BatchExportShell"
+             xmlns:prism="http://prismlibrary.com/" >
+    <Application.Resources>
+        <!--here is where we refrence the resource dictionaries for the batch cards and treeviews and such-->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/BatchCards.xaml"/>
+                <ResourceDictionary Source="/Themes/TreeViewThemes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+</prism:PrismApplication>

@@ -1,0 +1,124 @@
+﻿<Window x:Class="BatchExportShell.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Height="512" Width="1012"
+        Background="#36393F"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.ColumnSpan="2"
+                Background="#182B49"
+                MouseDown="Border_MouseDown">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="DICOM-Export"
+                       Foreground="White"
+                       FontWeight="Bold"/>
+                </Grid>
+
+
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <Button Width="20" Height="20"
+                            Content="🗕"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="Gray"
+                            Click="ButtonMinimize_Click"/>
+                    <Button Width="20" Height="20"
+                            Content="🗖"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="Gray" 
+                            Click="ButtonMaximize_Click"/>
+                    <Button Width="20" Height="20"
+                            Content="🗙"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="Gray" 
+                            Click="ButtonClose_Click"/>
+                </StackPanel>
+
+
+
+            </Grid>
+
+        </Border>
+        <Grid Background="#2F3136"
+              Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Content="Menu"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="18"
+                   FontWeight="Medium"
+                   Foreground="Gray"/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+
+                    <RowDefinition Height="280"/>
+                </Grid.RowDefinitions>
+                <Button Content="Build Batch" Grid.Row="0"
+                        Background="Transparent"
+                        Foreground="White"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="BuildBatchView"/>
+                <Button Content="View Current Batch" Grid.Row="1"
+                        Background="Transparent"
+                        Foreground="White"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="CurrentBatchView"/>
+                <Button Content="Export Batch" Grid.Row="2"
+                        Background="Transparent"
+                        Foreground="White"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="ExportBatchView"/>
+               
+                <Image Grid.Row="4" Margin="0,0,0,-15" Width="300">
+                    <Image.Source>
+                        <BitmapImage DecodePixelWidth="300" UriSource="/Resources/Trident.PNG"/>
+                    </Image.Source>
+
+                </Image>
+
+            </Grid>
+
+        </Grid>
+        <ContentControl Grid.Row="1" Grid.Column="1" prism:RegionManager.RegionName="ContentRegion"/>
+
+    </Grid>
+</Window>
+

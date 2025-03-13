@@ -1,0 +1,205 @@
+﻿<UserControl x:Class="BatchTools.Views.ExportBatchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BatchTools.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="Transparent"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <ControlTemplate x:Key="ButtonTemplate1" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="2"  Text="EXPORT" Foreground="white" FontSize="40" FontWeight="Bold" FontStyle="Oblique" HorizontalAlignment="Center" TextDecorations="Underline"/>
+        <Button HorizontalAlignment="Center" Template="{DynamicResource ButtonTemplate1}" Grid.Row="2" Grid.Column="1" Command="{Binding ExportLocalCommand}" Background="Transparent"  BorderThickness="0">
+
+
+            <Image Source="/Resources/computer-removebg-preview.png">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" Color="Blue" Opacity="1" BlurRadius="20"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Image.Style>
+            </Image>
+
+        </Button>
+        <TextBlock Text="Local Export" Grid.Row="3" Grid.Column="1" Foreground="white" FontStyle="Oblique" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center"/>
+        <TextBlock Text="Data Source" Grid.Row="3" Grid.Column="3" Foreground="white" FontStyle="Oblique" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center"/>
+        <TextBlock Text="Anonymize" Grid.Row="3" Grid.Column="2" Foreground="white" FontStyle="Oblique" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center"/>
+
+        <CheckBox Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" IsChecked="{Binding AnonymizeCB}" />
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Vertical" Grid.RowSpan="2" HorizontalAlignment="Left">
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <Label  Content="AE Title:" Foreground="White" HorizontalAlignment="right"/>
+                <TextBox Text="{Binding LocalAETitle}" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <Label  Content="IP:" Foreground="White" HorizontalAlignment="Right"/>
+                <TextBox Text="{Binding LocalIP}" Width="200"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <Label  Content="Port:" Foreground="White" HorizontalAlignment="Right"/>
+                <TextBox Text="{Binding LocalPort}" Width="200"/>
+            </StackPanel>
+                <Button Grid.Row="0" Grid.Column="1"  Content="Export Local"
+
+                        Background="#FFCD00" Margin="60,0,0,0"
+                        Foreground="black" FontWeight="Medium" 
+                        Command="{Binding ExportLocalCommand}" 
+                        BorderThickness="0" MaxWidth="150"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowDuration="10000"
+                        ToolTip="Exports the DICOM files for all batch items to the chosen direcctory."
+            >
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Background" CornerRadius="20" Background="#FFCD00">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="Background" Value="Gray"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="Background" Value="Gray"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
+                </Button.Template>
+            </Button>
+
+
+
+            <Button Grid.Row="0" Grid.Column="1"  Content="Export Local (No CT)"
+                        Background="#FFCD00"  Margin="60,0,0,0"
+                        Foreground="black" FontWeight="Medium" 
+                        Command="{Binding ExportLocalCommandNoCT}" 
+                        BorderThickness="0" MaxWidth="150"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowDuration="10000"
+                        ToolTip="Exports the DICOM files for all batch items to the chosen direcctory."
+            >
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Background" CornerRadius="20" Background="#FFCD00">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="Background" Value="Gray"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="Background" Value="Gray"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
+                </Button.Template>
+            </Button>
+
+
+
+        </StackPanel>
+
+
+        <Button Template="{DynamicResource ButtonTemplate1}" Grid.Row="2" Grid.Column="3" Command="{Binding ExportMimCommand}" Background="Transparent"  BorderThickness="0">
+
+
+            <Image Source="/Resources/blue-database-removebg-preview.png">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" Color="Blue" Opacity="1" BlurRadius="20"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Image.Style>
+            </Image>
+            
+
+
+        </Button>
+        <StackPanel Grid.Row="4" Grid.Column="3" Orientation="Vertical" Grid.RowSpan="2" HorizontalAlignment="center">
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <Label  Content="AE Title:" Foreground="White" HorizontalAlignment="right"/>
+                <TextBox Text="{Binding VarianAETitle}" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <Label  Content="IP:" Foreground="White" HorizontalAlignment="Right"/>
+                <TextBox Text="{Binding VarianIP}" Width="200"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <Label  Content="Port:" Foreground="White" HorizontalAlignment="Right"/>
+                <TextBox Text="{Binding VarianPort}" Width="200"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</UserControl>
