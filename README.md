@@ -1,4 +1,4 @@
-# Batch Export
+# About Batch Export
 
 Batch Export is a tool to export patient DICOM data from the Eclipse TPS in batch. This tool allows users to query and export data based on patient medical record numbers, and more specifically treatment, courses, and plans. In doing so, users can identify all desired patients within a given database, view all plans associated for a given list of patients, and create a list batch that can later be saved and used to export the associated DICOM files. Ultimately, we have developed a tool for researchers and users to query, organize, and acquire patient DICOM data in an efficient manner. In doing so, challenges faced in radiation oncology and medical physics research such as data scarcity and collecting efficiency may be mitigated.
 
