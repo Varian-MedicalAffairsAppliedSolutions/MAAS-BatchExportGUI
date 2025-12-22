@@ -12,7 +12,7 @@ To read further on Batch Export: JACMP Technical Note - *currently being publish
 ## 1) Installing the GUI
 To install the GUI for Batch Export, please install the built, distributable version of the application found at [this Dropbox link](https://www.dropbox.com/scl/fo/ziz7w7km4k1wispts1iby/ACuXmjbySdElRVnj_fel1bE?rlkey=hyv53ppkghqpnngs97jmstrim&st=56g9exth&dl=0)
 
-## 3) Using the application
+## 2) Using the application
 The GUI contains 3 tabs: `Build Batch`, `View Current Batch`, and `Export Batch`.
 
 #### 1. Build Batch
