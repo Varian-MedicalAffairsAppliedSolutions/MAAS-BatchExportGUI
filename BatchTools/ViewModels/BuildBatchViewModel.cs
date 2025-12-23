@@ -77,6 +77,7 @@ namespace BatchTools.ViewModels
 
         public BuildBatchViewModel(IEventAggregator eventAggregator)
         {
+
             ImportQueryCommand = new DelegateCommand<object>(ImportQueryAsync).ObservesCanExecute(()=>BackendReady);
             StackPanelClickCommand = new DelegateCommand<object>(StackPanelClick);
             ResetCurrentResultsCommand = new DelegateCommand(ResetCurrentResults);
@@ -404,13 +405,12 @@ namespace BatchTools.ViewModels
 
             // start the GetPatients.exe file ocated in PythonScripts/dist/Getpatients
             var thisdir = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
-           
+
             //var process = Process.Start(thisdir + "/PythonScripts/dist/GetPatients/GetPatients.exe");
             //process.WaitForExit();
             // same as before but without showing a console window
             var start = new ProcessStartInfo();
             start.FileName = thisdir + "/PythonScripts/dist/GetPatients/GetPatients.exe";
-            start.WorkingDirectory = thisdir;
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             start.RedirectStandardError = true;
@@ -420,6 +420,7 @@ namespace BatchTools.ViewModels
             process.WaitForExit();
             return "success";
         }
+
         #endregion
 
     }
