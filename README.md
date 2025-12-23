@@ -10,9 +10,27 @@ To read further on Batch Export: JACMP Technical Note - *currently being publish
 # Batch Export Quick Start Guide
 
 ## 1) Installing the GUI
-To install the GUI for Batch Export, please install the built, distributable version of the application found at [this Dropbox link](https://www.dropbox.com/scl/fo/ziz7w7km4k1wispts1iby/ACuXmjbySdElRVnj_fel1bE?rlkey=hyv53ppkghqpnngs97jmstrim&st=56g9exth&dl=0)
+The GUI for Batch Export can be installed using 2 methods:
+#### Method 1: Cloning the repository
+To gain access and version control of all the files, clone the repository by clicking `Code` and using the preferred method of cloning.
 
-## 2) Using the application
+<img src="https://github.com/user-attachments/assets/2295830c-d7b4-4a2b-951f-87b26443eaaa" alt="clonerepo" width="600"/>
+
+#### Method 2: Download ZIP
+By clicking `Code`, there is also a `Download ZIP` button which can be clicked. This will download all the necessary files **without** version control, meaning that when any new updates are made, all files must be redownloaded.
+
+## 2) Opening the application
+Once cloned/downloaded, the following files should be present:
+
+<img src="https://github.com/user-attachments/assets/cc0b0bf8-b072-4414-86c5-efb91ab00ec9" alt="openapp" width="600"/>
+
+Open `BatchExport.sln`, as this will be the entry point into using the GUI (*note: Visual Studio must be downloaded*).
+
+## 3) Using the application
+In Visual Studio, to begin using the application press the green play button that says `BatchExportShell` at the top, this will build and open the GUI.
+
+<img src="https://github.com/user-attachments/assets/905688b5-886b-4cc4-ae10-acd7fccc9d15" alt="openapp" width="600"/>
+
 The GUI contains 3 tabs: `Build Batch`, `View Current Batch`, and `Export Batch`.
 
 #### 1. Build Batch
@@ -38,5 +56,4 @@ Finally to perform export, the IP, port, and AE title must be configured for the
 Once one of the `Export Local` buttons are clicked and the proper configuration is inputted, the user will choose a location where to store all the files and the underlying backend will begin downloading all the plans in an organized structure.
 
 <img src="https://github.com/user-attachments/assets/4cf94ce5-c84d-4771-89c1-22334fae1ec1" alt="openapp" width="600"/>
-
 
