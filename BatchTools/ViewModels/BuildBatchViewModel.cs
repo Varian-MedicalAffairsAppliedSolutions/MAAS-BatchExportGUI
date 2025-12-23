@@ -410,7 +410,7 @@ namespace BatchTools.ViewModels
             // same as before but without showing a console window
             var start = new ProcessStartInfo();
             start.FileName = thisdir + "/PythonScripts/dist/GetPatients/GetPatients.exe";
-
+            start.WorkingDirectory = thisdir;
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             start.RedirectStandardError = true;
